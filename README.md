@@ -1,7 +1,7 @@
 # Web LAB-1 - Hello Project
 
 ## Hakkinda
-Bu proje, Web Tasarimi ve Programlama dersi LAB-1 kapsaminda Vite + React + TypeScript kullanilarak olusturulmustur.
+Bu projeyi, Web Tasarimi ve Programlama dersi LAB-1 icin Vite + React + TypeScript kullanarak olusturdum.
 
 ## Gelistirici
 - **Ad Soyad:** Esma Berfin Kaya

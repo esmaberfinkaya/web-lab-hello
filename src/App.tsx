@@ -66,7 +66,7 @@ function App() {
           
           <article>
             <h3>Erişilebilir Portföy Sayfası (LAB-2)</h3>
-            <p><strong>Açıklama:</strong> HTML5 semantik etiketleri tamamen doğru hiyerarşide (H1 > H2) kullanılarak hazırlanmış, görme ve motor engelli kullanıcılar dahil tüm bireyler için optimize edilmiş portföy tasarımı.</p>
+            <p><strong>Açıklama:</strong> HTML5 semantik etiketleri tamamen doğru hiyerarşide (H1 &gt; H2) kullanılarak hazırlanmış, görme ve motor engelli kullanıcılar dahil tüm bireyler için optimize edilmiş portföy tasarımı.</p>
             <p><strong>Teknolojiler:</strong> React, a11y standartları, Responsive CSS.</p>
           </article>
         </section>
