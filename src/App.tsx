@@ -8,6 +8,9 @@ function App() {
       </a>
 
       <header>
+        <div className="site-title" style={{ fontSize: 'var(--text-xl)', fontWeight: '700', color: 'var(--color-primary)' }}>
+          EBK Portföy
+        </div>
         <nav aria-label="Ana navigasyon">
           <ul>
             <li><a href="#hakkimda">Hakkımda</a></li>
@@ -20,55 +23,65 @@ function App() {
       <main id="main-content">
         <section id="hakkimda">
           <h2>Hakkımda</h2>
-          <figure>
-            <img 
-              src="/profil.jpg" 
-              alt="Esma Berfin Kaya'nın fotoğrafı" 
-            />
-            <figcaption>Esma Berfin Kaya</figcaption>
-          </figure>
-          <p>
-            Merhaba! Ben Esma, oyun geliştirme ve erişilebilir web tasarımı konularına ilgili bir geliştiriciyim. 
-            Amacım oyun geliştiricilerin iş akışlarını kolaylaştıracak sistemler ve kullanıcı dostu arayüzler tasarlamaktır.
-          </p>
-          <h3>Yetenekler & İlgi Alanları</h3>
-          <ul>
-            <li>Semantik HTML5 & Erişilebilirlik (a11y)</li>
-            <li>React & TypeScript</li>
-            <li>Oyun Tasarım Mekanikleri</li>
-            <li>Topluluk ve Ekosistem Yönetimi</li>
-          </ul>
+          <div className="about-content">
+            <figure>
+              <img 
+                src="/profil.jpg" 
+                alt="Esma Berfin Kaya'nın fotoğrafı" 
+              />
+              <figcaption style={{marginTop: 'var(--space-sm)'}}>Esma Berfin Kaya</figcaption>
+            </figure>
+            <div>
+              <p>
+                Merhaba! Ben Esma, oyun geliştirme ve erişilebilir web tasarımı konularına ilgili bir geliştiriciyim. 
+                Amacım oyun geliştiricilerin iş akışlarını kolaylaştıracak sistemler ve kullanıcı dostu arayüzler tasarlamaktır.
+              </p>
+              
+              <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
+                <li>Semantik HTML5 & a11y</li>
+                <li>CSS3 & Responsive</li>
+                <li>React & TypeScript</li>
+                <li>Oyun Tasarımı / Mekanikleri</li>
+                <li>Topluluk Yönetimi</li>
+              </ul>
+            </div>
+          </div>
         </section>
 
         <section id="projeler">
           <h2>Projelerim</h2>
           
-          <article>
-            <h3>Gameveloper</h3>
-            <p><strong>Proje Türü:</strong> Oyun geliştiriciler ve oynayanlar için ortaklık ve fikir danışma ekosistemi</p>
-            <p><strong>Problem:</strong> Oyun geliştirmeye yeni başlayanlar, karmaşık araç yığınları arasında yolunu kaybetmektedir. Odaklanmış rehberlik, hızlı çözüm ve yatırımcı-ekip uyumu sağlayan tek bir birleştirici platform bulunmamaktadır.</p>
-            <p><strong>Hedef Kullanıcı:</strong></p>
-            <ul>
-              <li>Oyun dünyasına yeni adım atan öğrenciler ve hobi kullanıcıları</li>
-              <li>Araçlar arası geçiş ve teknik sorunlar yaşayan bağımsız (indie) geliştiriciler</li>
-              <li>Tavsiye ve eleştiri sunmak isteyen oyun tutkunları</li>
-            </ul>
-            <p><strong>Özellikler:</strong></p>
-            <ul>
-              <li><strong>Araç Kütüphanesi & Rehberler:</strong> Unity, Unreal, Blender arasındaki doğru iş akışları.</li>
-              <li><strong>Soru-Cevap & Etiketleme:</strong> Geliştiriciler için versiyon bazlı (Örn: #Unity2022) odaklı yardım modülü.</li>
-              <li><strong>Yol Haritası (Roadmap):</strong> Kullanıcılar tarafından oluşturulabilen, oylanabilen detaylı "nasıl yapılır" akışları.</li>
-              <li><strong>Collaboration Hub:</strong> Projelerde eksik roller için ilan açma ve görev planlama.</li>
-              <li><strong>Review-as-a-Service:</strong> Yeni oyunların uzmanlar ve oyuncular tarafından test edilip raporlanması.</li>
-              <li><strong>Premium Store:</strong> Geliştiriciler tarafından satılan asset, eklenti ve mentorluk pazar yeri.</li>
-            </ul>
-          </article>
-          
-          <article>
-            <h3>Erişilebilir Portföy Sayfası (LAB-2)</h3>
-            <p><strong>Açıklama:</strong> HTML5 semantik etiketleri tamamen doğru hiyerarşide (H1 &gt; H2) kullanılarak hazırlanmış, görme ve motor engelli kullanıcılar dahil tüm bireyler için optimize edilmiş portföy tasarımı.</p>
-            <p><strong>Teknolojiler:</strong> React, a11y standartları, Responsive CSS.</p>
-          </article>
+          <div className="project-grid">
+            <article className="project-card">
+              <h3>Gameveloper</h3>
+              <p>Oyun geliştiriciler ve oynayanlar için ortaklık ve fikir danışma ekosistemi. Araç rehberleri, yol haritası ve review sistemi içerir.</p>
+              <ul className="skill-tags">
+                <li>Topluluk</li>
+                <li>Roadmap</li>
+                <li>Araçlar</li>
+              </ul>
+            </article>
+            
+            <article className="project-card">
+              <h3>Erişilebilir Portföy Sayfası</h3>
+              <p>HTML5 semantik etiketleri kullanılarak tamamen doğru hiyerarşide, görme ve motor engelli kullanıcılar dahil tüm bireyler için optimize edilmiş portföy.</p>
+              <ul className="skill-tags">
+                <li>React</li>
+                <li>a11y</li>
+                <li>Vite</li>
+              </ul>
+            </article>
+
+            <article className="project-card">
+              <h3>Mobile-first Layout (LAB-3)</h3>
+              <p>Flexbox ve CSS Grid kullanılarak 3 farklı breakpoint için tasarlanmış tamamen responsive web grid çalışması.</p>
+              <ul className="skill-tags">
+                <li>CSS Grid</li>
+                <li>Flexbox</li>
+                <li>Fluid Typography</li>
+              </ul>
+            </article>
+          </div>
         </section>
 
         <section id="iletisim">
@@ -139,7 +152,7 @@ function App() {
       </main>
 
       <footer>
-        <p>&copy; 2025 Esma Berfin Kaya (Gameveloper v1.0). Tüm hakları saklıdır.</p>
+        <p>&copy; 2025 Esma Berfin Kaya (Gameveloper v2.0). Tüm hakları saklıdır.</p>
       </footer>
     </>
   );
