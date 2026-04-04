@@ -1,127 +1,137 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Button from './components/Button';
+import Input from './components/Input';
+import Card from './components/Card';
+import UIKit from './pages/UIKit';
 
 function App() {
+  const [showUIKit, setShowUIKit] = useState(false);
+
+  if (showUIKit) {
+    return (
+      <div className="relative">
+        <button 
+          onClick={() => setShowUIKit(false)}
+          className="fixed bottom-4 right-4 z-50 bg-fuchsia-main text-pure-white px-4 py-2 rounded-full shadow-lg hover:bg-fuchsia-dark transition-colors"
+        >
+          Portföye Dön
+        </button>
+        <UIKit />
+      </div>
+    );
+  }
+
   return (
-    <>
-      <a href="#main-content" className="skip-link">
+    <div className="min-h-screen bg-pure-white dark:bg-pure-black text-pure-black dark:text-pure-white font-sans transition-colors duration-200">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-fuchsia-main text-pure-white p-2 z-50">
         Ana İçeriğe Atla
       </a>
 
-      <header>
-        <div className="site-title" style={{ fontSize: 'var(--text-xl)', fontWeight: '700', color: 'var(--color-primary)' }}>
-          EBK Portföy
+      <header className="sticky top-0 z-40 bg-pure-white/90 dark:bg-pure-black/90 backdrop-blur-md border-b border-icy-pink dark:border-fuchsia-dark">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div className="text-xl font-bold text-fuchsia-main dark:text-icy-pink">
+            EBK Portföy
+          </div>
+          <nav aria-label="Ana navigasyon" className="flex items-center gap-4">
+            <ul className="flex flex-wrap gap-2">
+              <li><a href="#hakkimda" className="px-3 py-1 rounded-md hover:bg-icy-pink dark:hover:bg-fuchsia-dark/30 transition-colors font-medium">Hakkımda</a></li>
+              <li><a href="#projeler" className="px-3 py-1 rounded-md hover:bg-icy-pink dark:hover:bg-fuchsia-dark/30 transition-colors font-medium">Projeler</a></li>
+              <li><a href="#iletisim" className="px-3 py-1 rounded-md hover:bg-icy-pink dark:hover:bg-fuchsia-dark/30 transition-colors font-medium">İletişim</a></li>
+            </ul>
+            <button 
+              onClick={() => setShowUIKit(true)}
+              className="text-sm px-3 py-1 border border-fuchsia-main text-fuchsia-main rounded-full hover:bg-fuchsia-main hover:text-pure-white transition-colors"
+            >
+              UI Kit
+            </button>
+            <button
+              onClick={() => document.documentElement.classList.toggle('dark')}
+              className="p-1 rounded-full text-fuchsia-main dark:text-icy-pink hover:bg-icy-pink dark:hover:bg-fuchsia-dark/30"
+              aria-label="Tema Değiştir"
+            >
+              <span className="dark:hidden text-lg">&#9790;</span>
+              <span className="hidden dark:inline text-lg">&#9728;</span>
+            </button>
+          </nav>
         </div>
-        <nav aria-label="Ana navigasyon">
-          <ul>
-            <li><a href="#hakkimda">Hakkımda</a></li>
-            <li><a href="#projeler">Projeler</a></li>
-            <li><a href="#iletisim">İletişim</a></li>
-          </ul>
-        </nav>
       </header>
 
       <main id="main-content">
-        <section id="hakkimda">
-          <h2>Hakkımda</h2>
-          <div className="about-content">
-            <figure>
+        <section id="hakkimda" className="py-16 px-4">
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8">
+            <figure className="shrink-0 flex flex-col items-center">
               <img 
                 src="/profil.jpg" 
                 alt="Esma Berfin Kaya'nın fotoğrafı" 
+                className="w-48 h-48 rounded-full border-4 border-icy-pink dark:border-fuchsia-dark object-cover shadow-lg"
               />
-              <figcaption style={{marginTop: 'var(--space-sm)'}}>Esma Berfin Kaya</figcaption>
+              <figcaption className="mt-4 font-semibold text-fuchsia-main dark:text-icy-pink">Esma Berfin Kaya</figcaption>
             </figure>
             <div>
-              <p>
+              <h2 className="text-3xl font-bold mb-4 text-center md:text-left">Hakkımda</h2>
+              <p className="text-lg leading-relaxed text-muted-gray mb-6 dark:text-gray-300">
                 Merhaba! Ben Esma, oyun geliştirme ve erişilebilir web tasarımı konularına ilgili bir geliştiriciyim. 
                 Amacım oyun geliştiricilerin iş akışlarını kolaylaştıracak sistemler ve kullanıcı dostu arayüzler tasarlamaktır.
               </p>
               
-              <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
-                <li>Semantik HTML5 & a11y</li>
-                <li>CSS3 & Responsive</li>
-                <li>React & TypeScript</li>
-                <li>Oyun Tasarımı / Mekanikleri</li>
-                <li>Topluluk Yönetimi</li>
+              <ul className="flex flex-wrap gap-2" role="list" aria-label="Beceri etiketleri">
+                <li className="bg-fuchsia-main text-pure-white px-3 py-1 rounded-full text-sm shadow-sm">Semantik HTML5 & a11y</li>
+                <li className="bg-fuchsia-main text-pure-white px-3 py-1 rounded-full text-sm shadow-sm">CSS3 & Native Responsive</li>
+                <li className="bg-fuchsia-main text-pure-white px-3 py-1 rounded-full text-sm shadow-sm">React & TypeScript</li>
+                <li className="bg-icy-pink text-fuchsia-dark px-3 py-1 rounded-full text-sm font-medium shadow-sm">Oyun Tasarımı / Mekanikleri</li>
+                <li className="bg-icy-pink text-fuchsia-dark px-3 py-1 rounded-full text-sm font-medium shadow-sm">Topluluk Yönetimi</li>
               </ul>
             </div>
           </div>
         </section>
 
-        <section id="projeler">
-          <h2>Projelerim</h2>
-          
-          <div className="project-grid">
-            <article className="project-card">
-              <h3>Gameveloper</h3>
-              <p>Oyun geliştiriciler ve oynayanlar için ortaklık ve fikir danışma ekosistemi. Araç rehberleri, yol haritası ve review sistemi içerir.</p>
-              <ul className="skill-tags">
-                <li>Topluluk</li>
-                <li>Roadmap</li>
-                <li>Araçlar</li>
-              </ul>
-            </article>
+        <section id="projeler" className="py-16 px-4 bg-icy-pink/30 dark:bg-fuchsia-dark/10">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-10">Projelerim</h2>
             
-            <article className="project-card">
-              <h3>Erişilebilir Portföy Sayfası</h3>
-              <p>HTML5 semantik etiketleri kullanılarak tamamen doğru hiyerarşide, görme ve motor engelli kullanıcılar dahil tüm bireyler için optimize edilmiş portföy.</p>
-              <ul className="skill-tags">
-                <li>React</li>
-                <li>a11y</li>
-                <li>Vite</li>
-              </ul>
-            </article>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card variant="elevated" title="Gameveloper">
+                <p className="mb-4">Oyun geliştiriciler ve oynayanlar için ortaklık ve fikir danışma ekosistemi. Araç rehberleri, yol haritası ve review sistemi içerir.</p>
+                <div className="flex gap-2 flex-wrap text-xs">
+                  <span className="bg-icy-pink dark:bg-fuchsia-main dark:text-pure-white text-fuchsia-dark px-2 py-1 rounded">Topluluk</span>
+                  <span className="bg-icy-pink dark:bg-fuchsia-main dark:text-pure-white text-fuchsia-dark px-2 py-1 rounded">Roadmap</span>
+                  <span className="bg-icy-pink dark:bg-fuchsia-main dark:text-pure-white text-fuchsia-dark px-2 py-1 rounded">Araçlar</span>
+                </div>
+              </Card>
+              
+              <Card variant="outlined" title="Erişilebilir Portföy">
+                <p className="mb-4">HTML5 semantik etiketleri kullanılarak tamamen doğru hiyerarşide, görme ve motor engelli kullanıcılar dahil tüm bireyler için optimize edilmiş portföy.</p>
+                <div className="flex gap-2 flex-wrap text-xs">
+                  <span className="bg-fuchsia-main text-pure-white px-2 py-1 rounded">React</span>
+                  <span className="bg-fuchsia-main text-pure-white px-2 py-1 rounded">a11y</span>
+                </div>
+              </Card>
 
-            <article className="project-card">
-              <h3>Mobile-first Layout (LAB-3)</h3>
-              <p>Flexbox ve CSS Grid kullanılarak 3 farklı breakpoint için tasarlanmış tamamen responsive web grid çalışması.</p>
-              <ul className="skill-tags">
-                <li>CSS Grid</li>
-                <li>Flexbox</li>
-                <li>Fluid Typography</li>
-              </ul>
-            </article>
+              <Card variant="filled" title="Mobile-first Layout" footer={<Button size="sm" variant="ghost">İncele</Button>}>
+                <p className="mb-4">Flexbox ve CSS Grid kullanılarak 3 farklı breakpoint için tasarlanmış tamamen responsive Tailwind çalışması.</p>
+                <div className="flex gap-2 flex-wrap text-xs mt-2">
+                  <span className="bg-pure-white dark:bg-pure-black border border-icy-pink px-2 py-1 rounded">Tailwind v4</span>
+                  <span className="bg-pure-white dark:bg-pure-black border border-icy-pink px-2 py-1 rounded">Fluid UI</span>
+                </div>
+              </Card>
+            </div>
           </div>
         </section>
 
-        <section id="iletisim">
-          <h2>İletişim</h2>
-          <form action="#" method="POST" noValidate>
-            <fieldset>
-              <legend>Bizimle İletişime Geçin</legend>
-
-              <div className="form-group">
-                <label htmlFor="name">Ad Soyad:</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  required 
-                  minLength={2} 
-                  aria-describedby="name-error" 
-                />
-                <small id="name-error" className="error-msg" role="alert"></small>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">E-posta:</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  required 
-                  aria-describedby="email-error" 
-                />
-                <small id="email-error" className="error-msg" role="alert"></small>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="subject">Konu:</label>
+        <section id="iletisim" className="py-16 px-4">
+          <div className="max-w-lg mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-8">İletişim</h2>
+            <form action="#" method="POST" className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <Input id="name" label="Ad Soyad:" required placeholder="Adınız Soyadınız" />
+              <Input id="email" type="email" label="E-posta:" required placeholder="ornek@mail.com" />
+              
+              <div className="space-y-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-pure-black dark:text-pure-white">Konu:</label>
                 <select 
                   id="subject" 
                   name="subject" 
                   required 
-                  aria-describedby="subject-error"
+                  className="w-full px-3 py-2 rounded-lg border border-muted-gray focus:outline-none focus:ring-2 focus:ring-fuchsia-main dark:bg-pure-black dark:border-fuchsia-dark"
                 >
                   <option value="">-- Seçiniz --</option>
                   <option value="soru">Genel Soru</option>
@@ -129,32 +139,33 @@ function App() {
                   <option value="ortaklik">Gameveloper Proje Ortaklığı</option>
                   <option value="mentorluk">Mentorluk / Premium Store</option>
                 </select>
-                <small id="subject-error" className="error-msg" role="alert"></small>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="message">Mesajınız:</label>
+              <div className="space-y-1">
+                <label htmlFor="message" className="block text-sm font-medium text-pure-black dark:text-pure-white">Mesajınız:</label>
                 <textarea 
                   id="message" 
                   name="message" 
                   rows={5} 
                   required 
                   minLength={10} 
-                  aria-describedby="message-error"
+                  className="w-full px-3 py-2 rounded-lg border border-muted-gray focus:outline-none focus:ring-2 focus:ring-fuchsia-main dark:bg-pure-black dark:border-fuchsia-dark"
+                  placeholder="Mesajınızı buraya girin..."
                 ></textarea>
-                <small id="message-error" className="error-msg" role="alert"></small>
               </div>
 
-              <button type="submit">Gönder</button>
-            </fieldset>
-          </form>
+              <Button type="submit" variant="primary" size="lg" className="w-full">
+                Gönder
+              </Button>
+            </form>
+          </div>
         </section>
       </main>
 
-      <footer>
-        <p>&copy; 2025 Esma Berfin Kaya (Gameveloper v2.0). Tüm hakları saklıdır.</p>
+      <footer className="bg-icy-pink dark:bg-fuchsia-dark/20 border-t border-fuchsia-main/20 text-center py-6 px-4 text-fuchsia-dark dark:text-icy-pink text-sm">
+        <p>&copy; 2026 Esma Berfin Kaya (Gameveloper LAB-4 Tailwind v4). Tüm hakları saklıdır.</p>
       </footer>
-    </>
+    </div>
   );
 }
 
