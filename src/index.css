@@ -2,8 +2,8 @@
 
 @theme {
   /* Ana Renklerimiz: Fuşya, Icy Pink, Siyah, Beyaz */
-  --color-fuchsia-main: #d946ef;
-  --color-fuchsia-dark: #a21caf; /* Hover için koyu fuşya */
+  --color-fuchsia-main: #86198f;
+  --color-fuchsia-dark: #701a75; /* Hover için koyu fuşya */
   --color-icy-pink: #ffe4e6; /* hover/backgrounds vb. için açık ton */
   --color-pure-white: #ffffff;
   --color-pure-black: #000000;

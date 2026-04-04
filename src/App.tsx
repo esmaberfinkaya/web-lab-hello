@@ -1,11 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import type { Project, Category, SortField, SortOrder } from "./types/project";
+import { fetchProjects } from "./services/projectService";
+import { applyFilters } from "./utils/projectHelpers";
+
 import Button from './components/Button';
 import Input from './components/Input';
 import Card from './components/Card';
+import Alert from './components/Alert';
 import UIKit from './pages/UIKit';
 
 function App() {
   const [showUIKit, setShowUIKit] = useState(false);
+
+  // --- STATE (LAB-5) ---
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<Category | "all">("all");
+  const [sortField, setSortField] = useState<SortField>("year");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // --- API (FETCH) ---
+  useEffect(() => {
+    async function load() {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await fetchProjects();
+        setProjects(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Sunucuya ulaşılamadı. Bir hata oluştu.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, []);
+
+  // --- FİLTRELENMİŞ (DERIVED) VERİ ---
+  const filtered = applyFilters(projects, search, category, sortField, sortOrder);
+  const categories: (Category | "all")[] = ["all", "frontend", "fullstack", "backend", "mobile", "other"];
 
   if (showUIKit) {
     return (
@@ -89,32 +124,101 @@ function App() {
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-10">Projelerim</h2>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card variant="elevated" title="Gameveloper">
-                <p className="mb-4">Oyun geliştiriciler ve oynayanlar için ortaklık ve fikir danışma ekosistemi. Araç rehberleri, yol haritası ve review sistemi içerir.</p>
-                <div className="flex gap-2 flex-wrap text-xs">
-                  <span className="bg-icy-pink dark:bg-fuchsia-main dark:text-pure-white text-fuchsia-dark px-2 py-1 rounded">Topluluk</span>
-                  <span className="bg-icy-pink dark:bg-fuchsia-main dark:text-pure-white text-fuchsia-dark px-2 py-1 rounded">Roadmap</span>
-                  <span className="bg-icy-pink dark:bg-fuchsia-main dark:text-pure-white text-fuchsia-dark px-2 py-1 rounded">Araçlar</span>
-                </div>
-              </Card>
-              
-              <Card variant="outlined" title="Erişilebilir Portföy">
-                <p className="mb-4">HTML5 semantik etiketleri kullanılarak tamamen doğru hiyerarşide, görme ve motor engelli kullanıcılar dahil tüm bireyler için optimize edilmiş portföy.</p>
-                <div className="flex gap-2 flex-wrap text-xs">
-                  <span className="bg-fuchsia-main text-pure-white px-2 py-1 rounded">React</span>
-                  <span className="bg-fuchsia-main text-pure-white px-2 py-1 rounded">a11y</span>
-                </div>
-              </Card>
+            {/* HATA DURUMU */}
+            {error && (
+              <Alert variant="error" title="Bağlantı Hatası" className="mb-6">
+                {error}
+              </Alert>
+            )}
 
-              <Card variant="filled" title="Mobile-first Layout" footer={<Button size="sm" variant="ghost">İncele</Button>}>
-                <p className="mb-4">Flexbox ve CSS Grid kullanılarak 3 farklı breakpoint için tasarlanmış tamamen responsive Tailwind çalışması.</p>
-                <div className="flex gap-2 flex-wrap text-xs mt-2">
-                  <span className="bg-pure-white dark:bg-pure-black border border-icy-pink px-2 py-1 rounded">Tailwind v4</span>
-                  <span className="bg-pure-white dark:bg-pure-black border border-icy-pink px-2 py-1 rounded">Fluid UI</span>
-                </div>
-              </Card>
+            {/* FİLTRELER */}
+            <div className="flex flex-col md:flex-row gap-4 mb-8 bg-pure-white dark:bg-pure-black p-4 rounded-xl shadow-sm border border-icy-pink dark:border-fuchsia-dark">
+              <Input 
+                id="search"
+                placeholder="Proje ara (teknoloji, kelime)..."
+                value={search}
+                onChange={e => setSearch(e.target.value)} 
+                className="flex-1"
+              />
+              
+              <div className="flex flex-wrap gap-2 items-center">
+                {categories.map(cat => (
+                  <Button 
+                    key={cat}
+                    variant={category === cat ? "primary" : "ghost"}
+                    size="sm"
+                    onClick={() => setCategory(cat)}
+                  >
+                    {cat === "all" ? "Tümü" : cat.toUpperCase()}
+                  </Button>
+                ))}
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <select 
+                  value={sortField}
+                  onChange={e => setSortField(e.target.value as SortField)}
+                  className="border border-muted-gray focus:border-fuchsia-main focus:ring-1 focus:ring-fuchsia-main rounded-lg px-3 py-2 bg-pure-white dark:bg-pure-black dark:text-pure-white text-sm"
+                >
+                  <option value="year">Yıla Göre</option>
+                  <option value="title">A-Z İsim</option>
+                </select>
+                <Button 
+                  variant="secondary" 
+                  size="sm"
+                  onClick={() => setSortOrder(o => o === "asc" ? "desc" : "asc")}
+                >
+                  {sortOrder === "asc" ? "Artan" : "Azalan"}
+                </Button>
+              </div>
             </div>
+
+            {/* YÜKLENİYOR */}
+            {loading && (
+              <div className="flex justify-center py-20">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-fuchsia-main border-l-2"></div>
+              </div>
+            )}
+
+            {/* PROJE LİSTESİ */}
+            {!loading && filtered.length === 0 && (
+              <p className="text-center text-muted-gray py-10 font-medium text-lg">
+                Seçtiğiniz kriterle eşleşen proje bulunamadı.
+              </p>
+            )}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.map(project => (
+                <Card 
+                  key={project.id}
+                  variant={project.featured ? "elevated" : "outlined"}
+                  title={project.title}
+                >
+                  <p className="mb-4 text-sm dark:text-gray-300">{project.description}</p>
+                  
+                  <div className="flex gap-2 flex-wrap text-xs font-mono mb-4">
+                    {project.tech.map(t => (
+                      <span key={t} className="bg-icy-pink dark:bg-fuchsia-main/80 text-fuchsia-dark dark:text-pure-white px-2 py-1 rounded">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="text-xs text-muted-gray font-semibold pt-4 mt-auto border-t border-icy-pink dark:border-fuchsia-dark border-opacity-50 flex justify-between">
+                    <span>{project.year}</span>
+                    <span className="uppercase tracking-widest">{project.category}</span>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {/* SONUC SAYISI */}
+            {!loading && (
+              <p className="text-sm text-muted-gray mt-8 text-center bg-icy-pink dark:bg-fuchsia-dark/20 p-2 rounded-full inline-block mx-auto max-w-fit">
+                Gösterilen: <strong className="text-fuchsia-main dark:text-icy-pink">{filtered.length}</strong> / Toplam: <strong>{projects.length}</strong>
+              </p>
+            )}
+            
           </div>
         </section>
 
@@ -163,7 +267,7 @@ function App() {
       </main>
 
       <footer className="bg-icy-pink dark:bg-fuchsia-dark/20 border-t border-fuchsia-main/20 text-center py-6 px-4 text-fuchsia-dark dark:text-icy-pink text-sm">
-        <p>&copy; 2026 Esma Berfin Kaya (Gameveloper LAB-4 Tailwind v4). Tüm hakları saklıdır.</p>
+        <p>&copy; 2026 Esma Berfin Kaya (LAB-5: TypeScript & Fetch API). Tüm hakları saklıdır.</p>
       </footer>
     </div>
   );

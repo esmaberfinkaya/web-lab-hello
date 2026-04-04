@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Yorum Pusulası (Review Compass)",
+    "description": "Google Custom Search API ve Gemini AI entegrasyonuyla çalışan, ürünleri görsel veya metinle aramanızı sağlayan akıllı Flutter uygulaması. ML Kit ile cihaz üstü görsel oylama ve Firebase ile canlı veritabanı içerir.",
+    "tech": ["Flutter", "Firebase", "Gemini 1.5", "Google ML Kit"],
+    "year": 2024,
+    "category": "mobile",
+    "featured": true,
+    "image": ""
+  },
+  {
+    "id": 2,
+    "title": "Gameveloper",
+    "description": "Oyun geliştiriciler ve oynayanlar için ortaklık ve fikir danışma ekosistemi. Araç rehberleri, yol haritası ve review sistemi içerir.",
+    "tech": ["Web", "Topluluk", "Araçlar"],
+    "year": 2023,
+    "category": "fullstack",
+    "featured": true,
+    "image": ""
+  },
+  {
+    "id": 3,
+    "title": "Erişilebilir Portföy Sayfası",
+    "description": "Görme ve motor engelli kullanıcılar dahil tüm bireyler için optimize edilmiş, Tailwind v4 ve semantic HTML ile kurgulanmış portföy.",
+    "tech": ["React", "TypeScript", "Tailwind v4", "a11y"],
+    "year": 2026,
+    "category": "frontend",
+    "featured": false,
+    "image": ""
+  },
+  {
+    "id": 4,
+    "title": "Hava Durumu API Uygulaması",
+    "description": "OpenWeather API ile anlık hava durumu sorgulama ve asenkron veri yönetimi.",
+    "tech": ["JavaScript", "REST API", "CSS"],
+    "year": 2023,
+    "category": "frontend",
+    "featured": false,
+    "image": ""
+  },
+  {
+    "id": 5,
+    "title": "Görev Yöneticisi",
+    "description": "Drag-and-drop destekli Kanban tarzı görev panosu.",
+    "tech": ["React", "TypeScript", "DnD Kit"],
+    "year": 2024,
+    "category": "frontend",
+    "featured": false,
+    "image": ""
+  }
+]
