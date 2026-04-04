@@ -31,21 +31,21 @@
   },
   {
     "id": 4,
-    "title": "Hava Durumu API Uygulaması",
-    "description": "OpenWeather API ile anlık hava durumu sorgulama ve asenkron veri yönetimi.",
-    "tech": ["JavaScript", "REST API", "CSS"],
+    "title": "LiDAR 3D Voxel Dönüşümü ve Öbekleştirme",
+    "description": "3D Point Cloud veri setlerini 3D Voxel formatına dönüştüren mühendislik projesi. Yapay zekanın etraf algılaması ve nesne öğrenmesini kolaylaştırmak amacıyla renklere göre yüzey öbekleştirmesi/segmentasyon adımları içerir.",
+    "tech": ["LiDAR", "3D Voxel", "Yapay Zeka", "Point Cloud"],
     "year": 2023,
-    "category": "frontend",
+    "category": "other",
     "featured": false,
     "image": ""
   },
   {
     "id": 5,
-    "title": "Görev Yöneticisi",
-    "description": "Drag-and-drop destekli Kanban tarzı görev panosu.",
-    "tech": ["React", "TypeScript", "DnD Kit"],
+    "title": "LiDAR Point Cloud 2D Görüntü İşleme",
+    "description": "Karmaşık 3D Point Cloud LiDAR verilerini derinlik ve renk gibi çevresel parametrelerle hesaplayarak, yapay zeka analizlerine uygun 2D (ikinci boyut) renderlanmış renklendirilmiş (RGB) resim/image formatlarına çeviren algoritma.",
+    "tech": ["LiDAR", "2D Imaging", "Algoritma Tasarımı"],
     "year": 2024,
-    "category": "frontend",
+    "category": "other",
     "featured": false,
     "image": ""
   }
